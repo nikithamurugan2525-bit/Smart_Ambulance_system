@@ -1,0 +1,53 @@
+:root{
+  --map-bg: #eef6ff;
+  --marker-size: 46px;
+}
+
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+.map-area{
+  position: relative;
+  min-height: 360px;
+  background: linear-gradient(180deg,#f8fbff 0%, #eef6ff 100%);
+  border-top: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+/* Ambulance marker */
+.ambulance-marker{
+  position: absolute;
+  width: var(--marker-size);
+  height: var(--marker-size);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s linear;
+  z-index: 5;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+}
+
+/* Driver messages */
+.driver-messages li {
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-right: 8px;
+  background: rgba(13,110,253,0.06);
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+/* Citizen notifications */
+.citizen-notification {
+  border-left: 4px solid #0d6efd;
+  background: #f1f8ff;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+/* responsive tweaks for mobile */
+@media (max-width: 767px) {
+  .map-area { min-height: 300px; }
+  .ambulance-marker { width: 40px; height: 40px; font-size: 26px; }
+}

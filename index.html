@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LifeLine Connect — Frontend Prototype</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bg-primary text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h4 mb-0">LifeLine Connect — Prototype</h1>
+      <div class="text-end small">Demo: Frontend-only • Responsive</div>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <div class="row g-3">
+      <!-- Left: Driver Dashboard / Map simulation -->
+      <section class="col-12 col-lg-8">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <strong>Driver Dashboard (Map)</strong>
+            <div>
+              <button id="startTripBtn" class="btn btn-success btn-sm">Start Ambulance</button>
+              <button id="resetBtn" class="btn btn-outline-secondary btn-sm ms-2">Reset</button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div id="mapArea" class="map-area">
+              <!-- SVG styled 'roads' -->
+              <svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet" class="w-100 h-100">
+                <!-- main route -->
+                <path id="mainRoute" d="M5,50 L30,40 L60,30 L90,10" stroke="#0d6efd" stroke-width="1.2" fill="none" stroke-dasharray="0" opacity="0.9"></path>
+                <!-- alternate route -->
+                <path id="altRoute" d="M5,50 L30,50 L45,35 L70,20 L90,12" stroke="#6f42c1" stroke-width="1.2" fill="none" opacity="0.6"></path>
+              </svg>
+              <!-- ambulance marker -->
+              <div id="ambulance" class="ambulance-marker" aria-hidden="true">🚑</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex gap-3 flex-wrap">
+              <div><strong>Current Route:</strong> <span id="routeLabel">Main Route</span></div>
+              <div><strong>ETA (sim):</strong> <span id="etaLabel">—</span></div>
+              <div><strong>Messages:</strong></div>
+              <ul id="driverMessages" class="list-unstyled mb-0 driver-messages"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Citizen view + Hospital toggles -->
+      <aside class="col-12 col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header"><strong>Citizen App (Simulated)</strong></div>
+          <div class="card-body">
+            <p class="small text-muted">When ambulance starts, nearby users will receive an instant alert.</p>
+            <div id="citizenNotificationArea"></div>
+            <div class="d-grid mt-2">
+              <button id="simulateNotifyBtn" class="btn btn-primary">Simulate Notification (test)</button>
+            </div>
+            <hr>
+            <div class="mt-2">
+              <div><strong>Citizen Actions</strong></div>
+              <div class="d-grid gap-2 mt-2">
+                <button id="reportBlockBtn" class="btn btn-warning">⚠️ Report Road Block</button>
+                <button id="ackBtn" class="btn btn-outline-success">✅ Acknowledge / Clear Road</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><strong>Hospital Availability</strong></div>
+          <div class="card-body">
+            <ul class="list-group" id="hospitalList">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                St. Mary's Hospital
+                <div class="form-check form-switch">
+                  <input class="form-check-input hospital-toggle" type="checkbox" checked data-hospital="St. Mary's Hospital">
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                District Hospital
+                <div class="form-check form-switch">
+                  <input class="form-check-input hospital-toggle" type="checkbox" data-hospital="District Hospital">
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                CarePoint Clinic
+                <div class="form-check form-switch">
+                  <input class="form-check-input hospital-toggle" type="checkbox" checked data-hospital="CarePoint Clinic">
+                </div>
+              </li>
+            </ul>
+            <small class="text-muted mt-2 d-block">Toggle to simulate doctor/bed availability.</small>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer / Instructions -->
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="alert alert-light border">
+          <strong>Demo Script (use for PPT):</strong>
+          <ol class="mb-0">
+            <li>Click <em>Start Ambulance</em> — ambulance marker will start moving along the main route and citizens will receive a simulated notification.</li>
+            <li>Click <em>Report Road Block</em> in Citizen panel — driver receives the message and the route switches to an alternate route automatically (visual animation).</li>
+            <li>Toggle hospital switches to show acceptance / busy states for incoming patients.</li>
+            <li>Use <em>Reset</em> to set everything back to start.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-center py-3 small text-muted">LifeLine Connect — Frontend Prototype • Built for demo</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
